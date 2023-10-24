@@ -67,7 +67,7 @@ class DeslogarFirebase {
   Future<void> deslogar() async {
     try {
       await FirebaseAuth.instance.signOut();
-      Get.toNamed('/log_user');
+      Get.toNamed('/login');
     } catch (e) {
       print('Erro: $e');
     }

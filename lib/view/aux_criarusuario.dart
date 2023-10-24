@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listadecomprass/utils/colors.dart';
 import 'package:listadecomprass/custom/customText.dart';
+import 'package:listadecomprass/control/c_firebase.dart';
 
 class Aux_CriarUsuario extends StatefulWidget {
   const Aux_CriarUsuario({super.key});
@@ -45,6 +46,7 @@ class _Aux_CriarUsuarioState extends State<Aux_CriarUsuario> {
 
   @override
   Widget build(BuildContext context) {
+    CadastrarUsuario cadastrarUsuario = CadastrarUsuario(context);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -126,7 +128,12 @@ class _Aux_CriarUsuarioState extends State<Aux_CriarUsuario> {
                       backgroundColor: MaterialStateProperty.all(
                           ColorsCoworking.ButtonLogin),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      cadastrarUsuario.cadastraruser(
+                        _emailvalido.text,
+                        _senhavalida.text,
+                      );
+                    },
                     child: CustomText(
                       title: 'Cadastrar Usuário',
                     ),

@@ -15,7 +15,7 @@ Future<void> main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: '/login',
       getPages: [
         GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/login', page: () => Login()),

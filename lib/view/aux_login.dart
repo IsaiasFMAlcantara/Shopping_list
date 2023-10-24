@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:listadecomprass/custom/customText.dart';
 import 'package:listadecomprass/utils/colors.dart';
+
+import '../control/c_firebase.dart';
 
 class Aux_Login extends StatefulWidget {
   const Aux_Login({super.key});
@@ -45,6 +48,7 @@ class _Aux_LoginState extends State<Aux_Login> {
 
   @override
   Widget build(BuildContext context) {
+    LogarBaseFirebase logarBaseFirebase = LogarBaseFirebase(context);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -126,13 +130,32 @@ class _Aux_LoginState extends State<Aux_Login> {
                       backgroundColor: MaterialStateProperty.all(
                           ColorsCoworking.ButtonLogin),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      logarBaseFirebase.logarBase(
+                        _emailvalido.text,
+                        _senhavalida.text,
+                      );
+                    },
                     child: CustomText(
                       title: 'Login',
                     ),
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed('/criar_usuario');
+                  },
+                  child: Text('Crie sua conta'),
+                )
+              ],
             )
           ],
         ),
