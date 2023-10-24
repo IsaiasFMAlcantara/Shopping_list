@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:listadecomprass/view/criarusuario.dart';
 
 import 'view/login.dart';
 import 'view/homeScreen.dart';
 
-void main(){
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: '/home',
-    getPages: [
-      GetPage(name: '/home', page: () => HomeScreen()),
-      GetPage(name: '/login', page: () => Login()),
-      GetPage(name: '/criar_usuario', page: () => CriarUsuario()),
-    ],
-  ),);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/home',
+      getPages: [
+        GetPage(name: '/home', page: () => HomeScreen()),
+        GetPage(name: '/login', page: () => Login()),
+        GetPage(name: '/criar_usuario', page: () => CriarUsuario()),
+      ],
+    ),
+  );
 }
