@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:listadecomprass/view/gerenciarconta.dart';
 import 'firebase_options.dart';
 import 'package:listadecomprass/view/criarusuario.dart';
 
@@ -20,6 +21,7 @@ Future<void> main() async {
         GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/login', page: () => Login()),
         GetPage(name: '/criar_usuario', page: () => CriarUsuario()),
+        GetPage(name: '/gerenciarconta', page: () => GerenciarConta()),
       ],
     ),
   );
