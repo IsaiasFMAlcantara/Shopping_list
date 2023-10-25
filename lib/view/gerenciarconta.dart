@@ -11,6 +11,6 @@ class GerenciarConta extends StatefulWidget {
 class _GerenciarContaState extends State<GerenciarConta> {
   @override
   Widget build(BuildContext context) {
-    return Aux_GerenciarConta();
+    return const Aux_GerenciarConta();
   }
 }

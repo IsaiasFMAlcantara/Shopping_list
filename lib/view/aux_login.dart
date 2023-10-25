@@ -105,6 +105,7 @@ class _Aux_LoginState extends State<Aux_Login> {
                     height: 20,
                   ),
                   TextFormField(
+                    obscureText: true,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _senhavalida,
                     decoration: InputDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listadecomprass/view/aux_cadastraritem.dart';
 
 class CadastrarItem extends StatefulWidget {
   const CadastrarItem({Key? key}) : super(key: key);
@@ -10,6 +11,6 @@ class CadastrarItem extends StatefulWidget {
 class _CadastrarItemState extends State<CadastrarItem> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Aux_CadastrarItem();
   }
 }
