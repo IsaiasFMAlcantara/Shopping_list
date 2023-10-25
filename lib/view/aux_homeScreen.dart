@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listadecomprass/view/cadastraritem.dart';
+import 'package:listadecomprass/view/cadastrarlista.dart';
 import 'package:listadecomprass/view/itens.dart';
 import 'package:listadecomprass/view/listmensal.dart';
 
@@ -20,7 +20,7 @@ class _aux_HomeScreenState extends State<aux_HomeScreen> {
           index: _paginaSelecionada,
           children: [
             ListMensal(),
-            CadastrarItem(),
+            CadastrarLista(),
             Itens()
           ],
         ),
@@ -37,7 +37,7 @@ class _aux_HomeScreenState extends State<aux_HomeScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.app_registration), label: 'Cadastrar Item'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.storefront), label: 'Itens'),
+                icon: Icon(Icons.list_alt_sharp), label: 'Listas'),
           ],
         ));
   }
