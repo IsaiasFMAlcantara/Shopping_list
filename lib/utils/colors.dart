@@ -25,5 +25,6 @@ class ColorsCoworking{
 
   /* page - inicio */
   static const textpage = Color(0xff001514);
+  static const containerform = Color(0x2d74cf9c);
   /* page - fim */
 }
