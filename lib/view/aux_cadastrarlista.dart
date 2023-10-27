@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../custom/customText.dart';
-import '../utils/colors.dart';
+import 'package:listadecomprass/custom/customText.dart';
+import 'package:listadecomprass/utils/colors.dart';
 
 class Aux_CadastrarLista extends StatefulWidget {
   const Aux_CadastrarLista({Key? key}) : super(key: key);
@@ -11,168 +11,101 @@ class Aux_CadastrarLista extends StatefulWidget {
 
 class _Aux_CadastrarListaState extends State<Aux_CadastrarLista> {
   final _formKey = GlobalKey<FormState>();
-  bool _formValido = false;
-
-  TextEditingController _nomeItem = TextEditingController();
-  TextEditingController _quantidade = TextEditingController();
+  bool _formValid = false;
   TextEditingController _nomeLista = TextEditingController();
 
-  List<Widget> itemFields = [];
+  void _validateForm() {
+    _formKey.currentState?.validate();
+  }
+
+  String _validarEntrada(String? mensagem) {
+    if (mensagem == null || mensagem.isEmpty) {
+      return 'Preencha o campo';
+    } else {
+      return 'Campo preenchido';
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _nomeItem.addListener(_validacaoFormulario);
-    _quantidade.addListener(_validacaoFormulario);
-    _nomeLista.addListener(_validacaoFormulario);
+    _nomeLista.addListener(_validateForm);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _nomeItem.removeListener(_validacaoFormulario);
-    _quantidade.removeListener(_validacaoFormulario);
-    _nomeLista.removeListener(_validacaoFormulario);
+    _nomeLista.removeListener(_validateForm);
   }
 
-  void _validacaoFormulario() {
-    setState(() {
-      _formValido = _formKey.currentState?.validate() ?? false;
-    });
-  }
-
-  String? _validarEntrada(String? mensagem) {
-    if (mensagem == null || mensagem.isEmpty) {
-      return 'Preencha o campo';
-    }
-    return null;
-  }
-
-  void _adicionarItemField() {
-    setState(() {
-      itemFields.add(
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                  errorStyle: TextStyle(
-                    color: _formValido ? Colors.blue : Colors.red,
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: _formValido ? Colors.blue : Colors.red,
-                    ),
-                  ),
-                  labelText: "Nome do item",
-                ),
-                onChanged: (value) => _validacaoFormulario(),
-                validator: _validarEntrada,
-              ),
-            ),
-            SizedBox(width: 20),
-            Expanded(
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                  errorStyle: TextStyle(
-                    color: _formValido ? Colors.blue : Colors.red,
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: _formValido ? Colors.blue : Colors.red,
-                    ),
-                  ),
-                  labelText: "Quantidade",
-                ),
-                onChanged: (value) => _validacaoFormulario(),
-                validator: _validarEntrada,
-              ),
-            ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: _adicionarItemField,
+  void _showAlertDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Título do Alert'),
+          content: Text('Conteúdo do Alert'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Fechar'),
             ),
           ],
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            CustomText(
-              title: 'Cadastrar Item',
-              color: ColorsCoworking.textpage,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              color: ColorsCoworking.containerform,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: _nomeLista,
-                        decoration: InputDecoration(
-                          errorStyle: TextStyle(
-                            color: _formValido ? Colors.blue : Colors.red,
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: _formValido ? Colors.blue : Colors.red,
-                            ),
-                          ),
-                          labelText: "Nome da lista",
-                        ),
-                        onChanged: (value) => _validacaoFormulario(),
-                        validator: _validarEntrada,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              CustomText(
+                title: 'Cadastrar lista',
+                color: ColorsCoworking.textpage,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Form(
+                key: _formKey,
+                child: TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: _nomeLista,
+                  decoration: InputDecoration(
+                    errorStyle:
+                    TextStyle(color: _formValid ? Colors.blue : Colors.red),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: _formValid ? Colors.blue : Colors.red,
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: _adicionarItemField,
-                          ),
-                        ],
-                      ),
-                      ...itemFields,
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              ColorsCoworking.ButtonLogin),
-                        ),
-                        onPressed: _formValido ? () {
-                          print(itemFields);
-                        } : null,
-                        child: CustomText(
-                          title: 'Cadastrar Item',
-                        ),
-                      ),
-                    ],
+                    ),
+                    labelText: "Nome lista",
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _formValid = value.isNotEmpty;
+                    });
+                  },
+                  validator: _validarEntrada,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showAlertDialog();
+        },
+        tooltip: 'Cadastrar itens',
+        child: const Icon(Icons.add),
       ),
     );
   }
